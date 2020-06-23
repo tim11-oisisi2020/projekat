@@ -1,5 +1,12 @@
 [
 	{
+		"korisnickoIme" : "a",
+		"lozinka" : "a",
+		"ime" : "A",
+		"prezime" : "A", 
+		"tipKorisnika" : "LEKAR"
+	},
+	{
 		"korisnickoIme" : "pera@mail.com",
 		"lozinka" : "peracar",
 		"ime" : "Pera",

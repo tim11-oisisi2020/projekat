@@ -1,0 +1,43 @@
+[
+	{
+	
+		"sifra" : "s001",
+		"ime" : "Brufen",
+		"proizvodjac" : "Pera & Co",
+		"naRecept" : false,
+		"cena" : 117.5
+	},
+	{
+	
+		"sifra" : "s002",
+		"ime" : "Panadol",
+		"proizvodjac" : "Mika & Co",
+		"naRecept" : false,
+		"cena" : 180.6
+	},
+	{
+	
+		"sifra" : "s003",
+		"ime" : "Diklofen",
+		"proizvodjac" : "Zika & Co",
+		"naRecept" : true,
+		"cena" : 280.79
+	},
+	{
+	
+		"sifra" : "s004",
+		"ime" : "Ranisan",
+		"proizvodjac" : "Mika & Co",
+		"naRecept" : false,
+		"cena" : 90.0
+	},
+	{
+	
+		"sifra" : "s005",
+		"ime" : "Kafetin",
+		"proizvodjac" : "Pera & Co",
+		"naRecept" : false,
+		"cena" : 220.5
+	}
+
+]

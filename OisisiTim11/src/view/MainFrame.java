@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder;
 
 import model.TipKorisnika;
 import model.repo.KorisnikRepozitorijum;
+import model.repo.LekoviRepozitorijum;
 
 public class MainFrame extends JFrame {
 	
@@ -26,6 +27,7 @@ public class MainFrame extends JFrame {
 	private Color akcenatCrvena = new Color(171, 150, 129);
 	
 	private KorisnikRepozitorijum korisnikRepozitorijum;
+	private LekoviRepozitorijum lekRepozitorijum;
 	
 	private static MainFrame instance = null;
 	private final Gson gson;
@@ -35,6 +37,7 @@ public class MainFrame extends JFrame {
 		
 		String direktorijum = Paths.get("").toAbsolutePath() + "\\resources\\database\\";
 		this.korisnikRepozitorijum = new KorisnikRepozitorijum(gson, direktorijum);
+		this.lekRepozitorijum = new LekoviRepozitorijum(gson, direktorijum);
 	}
 	
 	public static MainFrame getInstance() {
@@ -108,6 +111,10 @@ public class MainFrame extends JFrame {
 		return korisnikRepozitorijum;
 	}
 	
+	public LekoviRepozitorijum getLekRepozitorijum() {
+		return lekRepozitorijum;
+	}
+
 	private void iscrtajKomponente() {
 		this.setSize(1200, 800);
 		this.setLocationRelativeTo(null);
