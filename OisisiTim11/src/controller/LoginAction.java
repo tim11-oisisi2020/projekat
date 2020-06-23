@@ -23,9 +23,10 @@ public class LoginAction implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		MainFrame mf = MainFrame.getInstance();
-		if (mf.getLoginFrame().getBrojLogovanja() > 3) {
+		if (mf.getLoginFrame().getBrojLogovanja() >= 3) {
 			JOptionPane.showMessageDialog(MainFrame.getInstance().getLoginFrame(), "Uneli ste nevalidne kredencijale vise od 3 puta. ", "Upozorenje", JOptionPane.WARNING_MESSAGE);
 			mf.getLoginFrame().setVisible(false);
+			return;
 		}
 		
 		String korisnickoIme = korisnickoImePolje.getText();

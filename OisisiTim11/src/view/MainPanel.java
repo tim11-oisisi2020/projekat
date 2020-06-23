@@ -6,6 +6,8 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.TipKorisnika;
+
 public class MainPanel extends JPanel {
 
 	public MainPanel() {

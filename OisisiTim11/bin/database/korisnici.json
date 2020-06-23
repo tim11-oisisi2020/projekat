@@ -1,0 +1,23 @@
+[
+	{
+		"korisnickoIme" : "pera@mail.com",
+		"lozinka" : "peracar",
+		"ime" : "Pera",
+		"prezime" : "Peric", 
+		"tipKorisnika" : "LEKAR"
+	},
+	{
+		"korisnickoIme" : "mika@mail.com",
+		"lozinka" : "mikacar",
+		"ime" : "Mika",
+		"prezime" : "Mikic", 
+		"tipKorisnika" : "APOTEKAR"
+	},
+	{
+		"korisnickoIme" : "zika@mail.com",
+		"lozinka" : "zikacar",
+		"ime" : "Zika",
+		"prezime" : "Zikic", 
+		"tipKorisnika" : "ADMINISTRATOR"
+	}
+]

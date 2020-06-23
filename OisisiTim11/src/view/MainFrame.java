@@ -31,15 +31,7 @@ public class MainFrame extends JFrame {
 	private final Gson gson;
 	
 	private MainFrame() {
-		this.setSize(1200, 800);
-		this.setLocationRelativeTo(null);
-		this.setTitle("Pharmacy Team 11");
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		
 		gson = new GsonBuilder().setPrettyPrinting().create();
-		
-		this.mainPanel = new MainPanel();
-		this.add(mainPanel);
 		
 		String direktorijum = Paths.get("").toAbsolutePath() + "\\resources\\database\\";
 		this.korisnikRepozitorijum = new KorisnikRepozitorijum(gson, direktorijum);
@@ -79,6 +71,7 @@ public class MainFrame extends JFrame {
 
 	public void sakrijLoginFrame() {
 		loginFrame.setVisible(false);
+		this.iscrtajKomponente();
 		this.setVisible(true);
 	}
 	
@@ -115,5 +108,14 @@ public class MainFrame extends JFrame {
 		return korisnikRepozitorijum;
 	}
 	
+	private void iscrtajKomponente() {
+		this.setSize(1200, 800);
+		this.setLocationRelativeTo(null);
+		this.setTitle("Pharmacy Team 11");
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
+		this.mainPanel = new MainPanel();
+		this.add(mainPanel);
+	}
 	
 }
