@@ -64,6 +64,10 @@ public class Lek {
 	public void setCena(float cena) {
 		this.cena = cena;
 	}
+	
+	public static String[] getTableHeader() {
+		return new String[]{"Sifra", "Ime", "Proizvodjac", "Na Recept", "Cena"};
+	}
 
 	@Override
 	public String toString() {
