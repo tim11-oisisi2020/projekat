@@ -1,9 +1,16 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,9 +19,11 @@ import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import controller.DodajIzmeniLekAction;
 import controller.LekoviSearchActions;
 import model.Lek;
 import model.table.DrugsTableModel;
+import view.dialog.DodajLekDialog;
 
 import javax.swing.JScrollPane;
 
@@ -22,6 +31,7 @@ public class TabelaLekovaPanel extends JPanel {
 	private TableModel model;
 
 	public TabelaLekovaPanel() {
+		this.setLayout(new BorderLayout());
 		JLabel wellcomeMessage = new JLabel();
 		wellcomeMessage.setText("Tabela Lekova");
 		wellcomeMessage.setFont(new Font("Serif", Font.BOLD, 40));
@@ -32,6 +42,7 @@ public class TabelaLekovaPanel extends JPanel {
 		this.add(wellcomeMessage);
 
 		this.addTable();
+		this.addBottomPanel();
 	}
 
 	private void addTable() {
@@ -67,6 +78,31 @@ public class TabelaLekovaPanel extends JPanel {
 		panel.add(searchField);
 		panel.add(new JScrollPane(table));
 		this.add(panel);
+	}
+	
+	private void addBottomPanel() {
+		JPanel buttonBox = new JPanel();
+		buttonBox.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 30));
+		buttonBox.setPreferredSize(new Dimension(100, 100));
+		buttonBox.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		
+		JButton insertujLek = new JButton("Insertuj Lek");
+		insertujLek.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DodajLekDialog dodajLekDialog = new DodajLekDialog(true);
+				dodajLekDialog.setVisible(true);
+			}
+		});
+		insertujLek.setPreferredSize(new Dimension(150, 50));
+		buttonBox.add(insertujLek);
+		
+		JButton editujLek = new JButton("Edituj Lek");
+		editujLek.setPreferredSize(new Dimension(150, 50));
+		buttonBox.add(editujLek);
+		
+		this.add(buttonBox, BorderLayout.SOUTH);
 	}
 
 }
