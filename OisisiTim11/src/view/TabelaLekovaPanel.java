@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -19,8 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import controller.DodajIzmeniLekAction;
-import controller.LekoviSearchActions;
+import controller.TabeleSearchActions;
 import model.Lek;
 import model.table.DrugsTableModel;
 import view.dialog.DodajLekDialog;
@@ -68,7 +66,7 @@ public class TabelaLekovaPanel extends JPanel {
 		searchField.setPreferredSize(new Dimension(150, 25));  
 		
 		// Set actions
-		LekoviSearchActions lekoviSearchActions = new LekoviSearchActions(searchField, searchableColumnsCb, sorter);
+		TabeleSearchActions lekoviSearchActions = new TabeleSearchActions(searchField, searchableColumnsCb, sorter);
 
 		searchField.addKeyListener(lekoviSearchActions.processKeyReleased());
 		searchableColumnsCb.addActionListener(lekoviSearchActions.processSelection());

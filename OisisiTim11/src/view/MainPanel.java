@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -16,6 +17,7 @@ import controller.KorisniciClickAction;
 import controller.KorpaClickAction;
 import controller.LekoviClickAction;
 import controller.ReceptiClickAction;
+import model.TipKorisnika;
 
 public class MainPanel extends JPanel {
 	
@@ -34,6 +36,8 @@ public class MainPanel extends JPanel {
 	public MainPanel() {
 		this.setBackground(new Color(204, 238, 255));
 		this.setLayout(new BorderLayout());
+		
+		TipKorisnika tipKorisnika = MainFrame.getInstance().getTipKorisnika();
 		
 		JPanel glavniToolbar = new JPanel();
 		glavniToolbar.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 30));
@@ -86,7 +90,12 @@ public class MainPanel extends JPanel {
 		glavniToolbar.add(logoPanel);
 		glavniToolbar.add(lekoviDugme);
 		glavniToolbar.add(receptiDugme);
-		glavniToolbar.add(korisniciDugme);
+		
+		// korisnici trebaju biti prikazani samo administratorima
+		if (tipKorisnika.equals(TipKorisnika.ADMINISTRATOR)) {
+			glavniToolbar.add(korisniciDugme);
+		}
+		
 		glavniToolbar.add(izvestajDugme);
 		glavniToolbar.add(korpaDugme);
 		
@@ -126,6 +135,18 @@ public class MainPanel extends JPanel {
 
 	public JPanel getTabelarniPrikaziCard() {
 		return tabelarniPrikaziCard;
+	}
+	
+	public JPanel vratiTrenutnoPrikazanuTabelaPanel() {
+		JPanel selektovaniPanel = null;
+
+	    for (Component panel : tabelarniPrikaziCard.getComponents() ) {
+	        if (panel.isVisible() == true) {
+	            selektovaniPanel = (JPanel) panel;
+	        }
+	    }
+
+	    return selektovaniPanel;
 	}
 	
 }
