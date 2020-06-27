@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
 	private final Gson gson;
 	
 	private MainFrame() {
-		gson = new GsonBuilder().setPrettyPrinting().create();
+		gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 		
 		String direktorijum = Paths.get("").toAbsolutePath() + "\\resources\\database\\";
 		this.korisnikRepozitorijum = new KorisnikRepozitorijum(gson, direktorijum);

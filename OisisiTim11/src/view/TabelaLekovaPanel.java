@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -26,7 +27,9 @@ import view.dialog.DodajLekDialog;
 import javax.swing.JScrollPane;
 
 public class TabelaLekovaPanel extends JPanel {
-	private TableModel model;
+	
+	private DrugsTableModel tableModel;
+	private JTable tabelaLekova;
 
 	public TabelaLekovaPanel() {
 		this.setLayout(new BorderLayout());
@@ -49,13 +52,13 @@ public class TabelaLekovaPanel extends JPanel {
 		// Create table
 		List<Lek> drugs = MainFrame.getInstance().getLekRepozitorijum().ucitajLekove();
 
-		this.model = new DrugsTableModel(drugs);
+		this.tableModel = new DrugsTableModel(drugs);
 
-		final JTable table = new JTable(this.model);
+		this.tabelaLekova = new JTable(this.tableModel);
 
-		final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.model);
+		final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.tableModel);
 
-		table.setRowSorter(sorter);
+		this.tabelaLekova.setRowSorter(sorter);
 
 		// Create Combo box for search
 		final JComboBox<String> searchableColumnsCb = new JComboBox<String>(Lek.getTableHeader());
@@ -74,7 +77,7 @@ public class TabelaLekovaPanel extends JPanel {
 		// Pack GUI
 		panel.add(searchableColumnsCb);
 		panel.add(searchField);
-		panel.add(new JScrollPane(table));
+		panel.add(new JScrollPane(tabelaLekova));
 		this.add(panel);
 	}
 	
@@ -89,18 +92,40 @@ public class TabelaLekovaPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DodajLekDialog dodajLekDialog = new DodajLekDialog(true);
+				DodajLekDialog dodajLekDialog = new DodajLekDialog(null);
 				dodajLekDialog.setVisible(true);
 			}
+			
 		});
+		
 		insertujLek.setPreferredSize(new Dimension(150, 50));
 		buttonBox.add(insertujLek);
 		
-		JButton editujLek = new JButton("Edituj Lek");
+		JButton editujLek = new JButton("Izmeni Lek");
+		editujLek.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int selektovaniIndeks = tabelaLekova.getSelectedRow();		
+					Lek lek = tableModel.nadjiLek(selektovaniIndeks);
+					DodajLekDialog dodajLekDialog = new DodajLekDialog(lek);
+					dodajLekDialog.setVisible(true);
+				} catch(Exception ex) {
+					String poruka = "Selektujte lek za izmenu";
+					JOptionPane.showMessageDialog(MainFrame.getInstance(),poruka);
+				}
+				
+			}
+		});
 		editujLek.setPreferredSize(new Dimension(150, 50));
 		buttonBox.add(editujLek);
 		
 		this.add(buttonBox, BorderLayout.SOUTH);
+	}
+
+	public DrugsTableModel getTableModel() {
+		return tableModel;
 	}
 
 }

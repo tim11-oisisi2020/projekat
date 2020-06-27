@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import model.Korisnik;
 import model.Lek;
 
 public class DrugsTableModel extends AbstractTableModel {
@@ -45,10 +46,28 @@ public class DrugsTableModel extends AbstractTableModel {
 				return "";
 		}
 	}
+	public void iscrtajTabeluSaLekovima(List<Lek> drugs) {
+		this.drugs.clear();
+		this.drugs.addAll(drugs);
+		this.fireTableDataChanged();
+	}
+	public Lek nadjiLek(int row) {
+		return drugs.get(row);
+	}
 
 	// This method will be used to display the name of columns
 	public String getColumnName(int col) {
 		return headerList[col];
+	}
+	
+	public Lek vratiSelektovanLek(int row) {
+		return this.drugs.get(row);
+	}
+	
+	public void forceDrugTableRefresh(List<Lek> drugs) {
+		this.drugs.clear();
+		this.drugs.addAll(drugs);
+		this.fireTableDataChanged();
 	}
 }
 

@@ -17,12 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.DodajIzmeniLekAction;
+import model.Korisnik;
 import model.Lek;
 import view.MainFrame;
 
 public class DodajLekDialog extends JDialog {
 	
-	boolean isInsert;
+	private Lek lek;	
 	
 	private JTextField sifraPolje;
 	private JTextField imePolje;
@@ -30,9 +31,9 @@ public class DodajLekDialog extends JDialog {
 	private JTextField cenaPolje;
 	private JComboBox<String> naReceptComboBox;
 	
-	public DodajLekDialog(boolean isInsert) {
+	public DodajLekDialog(Lek lek) {
 		super(MainFrame.getInstance());
-		this.isInsert = isInsert;
+		this.lek = lek;
 		
 		this.setSize(new Dimension(450, 600));
 		this.setLocationRelativeTo(null);
@@ -44,7 +45,11 @@ public class DodajLekDialog extends JDialog {
 		gornjiPanel.setPreferredSize(new Dimension(1000, 70));
 		gornjiPanel.setBackground(pozadina);
 		
-		JLabel naslov = new JLabel("Unesite novi lek");
+		String naslovString = "Unesite novi lek";
+		if (lek != null) {
+			naslovString = "Izmenite lek";
+		}
+		JLabel naslov = new JLabel(naslovString);
 		naslov.setFont(new Font("Serif", Font.BOLD, 22));
 		naslov.setHorizontalAlignment(JLabel.CENTER);
 		naslov.setVerticalAlignment(JLabel.CENTER);
@@ -157,15 +162,30 @@ public class DodajLekDialog extends JDialog {
 		});
 		buttonBox.add(otkazi);
 		
+		if (lek != null) {
+			this.sifraPolje.setText(lek.getSifra());
+			this.imePolje.setText(lek.getIme());
+			this.proizvodjacPolje.setText(lek.getProizvodjac());
+			boolean naRecept = lek.isNaRecept();
+			if (naRecept) {
+				this.naReceptComboBox.setSelectedItem("Da");
+			}else {
+				this.naReceptComboBox.setSelectedItem("Ne");
+			}
+			
+			this.cenaPolje.setText(""+lek.getCena());
+		}
+		
 		this.add(gornjiPanel, BorderLayout.NORTH);
 		this.add(glavniFlowPanel, BorderLayout.CENTER);
 		this.add(buttonBox, BorderLayout.SOUTH);
-		
 	}
 
-	public boolean isInsert() {
-		return isInsert;
+	public Lek getLek() {
+		return lek;
 	}
+
+
 
 	public JTextField getSifraPolje() {
 		return sifraPolje;

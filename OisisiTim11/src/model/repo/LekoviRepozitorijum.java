@@ -11,6 +11,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import model.Korisnik;
 import model.Lek;
 
 public class LekoviRepozitorijum {
@@ -59,6 +60,30 @@ public class LekoviRepozitorijum {
 		} catch (IOException e) {
 			return false;
 		}
+		return true;
+	}
+	
+	public boolean izmeniLek(Lek lekZaIzmenu, String staraSifra) {
+		List<Lek> lekovi = ucitajLekove();
+		int indeksPronadjenog = -1;
+		for (int i=0; i < lekovi.size(); i++) {
+			Lek lek = lekovi.get(i);
+			if (lek.getSifra().equals(staraSifra)) {
+				indeksPronadjenog = i;
+				break;
+			}
+					
+		}
+		if (indeksPronadjenog ==-1) {
+			return false;
+		}
+		lekovi.set(indeksPronadjenog, lekZaIzmenu);
+		try {
+			sacuvajNovoStanje(lekovi);
+		}catch(IOException e) {
+			return false;
+		}
+		
 		return true;
 	}
 	

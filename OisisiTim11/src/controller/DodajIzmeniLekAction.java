@@ -3,13 +3,18 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
+import model.Korisnik;
 import model.Lek;
 import model.repo.LekoviRepozitorijum;
 import view.MainFrame;
+import view.TabelaKorisnikaPanel;
+import view.TabelaLekovaPanel;
 import view.dialog.DodajLekDialog;
 
 public class DodajIzmeniLekAction implements ActionListener{
@@ -46,15 +51,31 @@ public class DodajIzmeniLekAction implements ActionListener{
 		Lek noviLek = new Lek(sifra, ime, proizvodjac, naRecept, cena);
 		
 		LekoviRepozitorijum lekoviRepozitorijum = MainFrame.getInstance().getLekRepozitorijum();
-		boolean uspesno = lekoviRepozitorijum.insertujLek(noviLek);
-		
+		boolean uspesno;
+		//ako je null onda je dodavanje, ako nije onda je izmena
+		if (dodajLekDialog.getLek() == null) {
+			uspesno = lekoviRepozitorijum.insertujLek(noviLek);
+		}else {
+			String staraSifra = dodajLekDialog.getLek().getSifra();
+			uspesno = lekoviRepozitorijum.izmeniLek(noviLek, staraSifra);
+			
+		}
 		if (!uspesno) {
 			String poruka = "Cuvanje novog leka nije uspesno.";
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);
 		} else {
 			dodajLekDialog.setVisible(false);
-		}
+			JPanel selektovaniPanel = MainFrame.getInstance().getMainPanel().vratiTrenutnoPrikazanuTabelaPanel();
+			
+			if (selektovaniPanel != null && selektovaniPanel instanceof TabelaLekovaPanel) {
+				TabelaLekovaPanel tabelaLekovaPanel = (TabelaLekovaPanel) selektovaniPanel;
+				List<Lek> lekovi = lekoviRepozitorijum.ucitajLekove();
+				tabelaLekovaPanel.getTableModel().iscrtajTabeluSaLekovima(lekovi);
+			} else {
+				String poruka = "Ponovno popunjavanje tabele neuspesno.";
+				JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);
+			}
 		
+		}
 	}
-
 }
