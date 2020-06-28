@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import model.TipKorisnika;
 import model.repo.KorisnikRepozitorijum;
 import model.repo.LekoviRepozitorijum;
+import model.repo.ReceptiRepozitorijum;
 
 public class MainFrame extends JFrame {
 	
@@ -28,6 +29,7 @@ public class MainFrame extends JFrame {
 	
 	private KorisnikRepozitorijum korisnikRepozitorijum;
 	private LekoviRepozitorijum lekRepozitorijum;
+	private ReceptiRepozitorijum receptiRepozitorijum;
 	
 	private static MainFrame instance = null;
 	private final Gson gson;
@@ -38,6 +40,7 @@ public class MainFrame extends JFrame {
 		String direktorijum = Paths.get("").toAbsolutePath() + "\\resources\\database\\";
 		this.korisnikRepozitorijum = new KorisnikRepozitorijum(gson, direktorijum);
 		this.lekRepozitorijum = new LekoviRepozitorijum(gson, direktorijum);
+		this.receptiRepozitorijum = new ReceptiRepozitorijum(gson, direktorijum);
 	}
 	
 	public static MainFrame getInstance() {
@@ -113,6 +116,10 @@ public class MainFrame extends JFrame {
 	
 	public LekoviRepozitorijum getLekRepozitorijum() {
 		return lekRepozitorijum;
+	}
+	
+	public ReceptiRepozitorijum getReceptiRepozitorijum() {
+		return receptiRepozitorijum;
 	}
 
 	private void iscrtajKomponente() {
