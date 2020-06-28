@@ -8,16 +8,22 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import model.Lek;
+import model.table.DrugsTableModel;
 
 import com.sun.glass.events.MouseEvent;
 
@@ -28,6 +34,8 @@ public class TabelaKorpaPanel extends JPanel {
 	public JPanel stanjePanel;
 	public JPanel receptPanel;
 	public JPanel bezReceptPanel;
+	public DefaultTableModel model = new DefaultTableModel();
+
 	
 	public TabelaKorpaPanel() {		
 		this.setLayout(new BorderLayout());
@@ -46,65 +54,77 @@ public class TabelaKorpaPanel extends JPanel {
 		this.add(this.tabKartica);
 	}
 	
-	private void addStanjePanel() {
+	public void addStanjePanel() {
 		this.stanjePanel = new JPanel();
-		
-        Object[] kolone = {"Sifra", "Ime", "Proizvodjac", "Recept", "Cena"};
-        DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(kolone);
 
-		JTable stanjeTabela = new JTable();
+        model.setColumnIdentifiers(Lek.getTableHeader());
+
+		JTable stanjeTabela = new JTable(model);
 		
 		stanjeTabela.setModel(model);
 		
 		JButton dugmeDodaj = new JButton("Dodaj");
 		JButton dugmeBrisi = new JButton("Brisi");
+		JButton dugmeReset = new JButton("Odustani");
 		
 		JScrollPane stanjePane = new JScrollPane(stanjeTabela);	
-		
-		Object[] red = new Object[5];
-		
-		dugmeDodaj.addActionListener(new ActionListener(){
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-   
-                red[0] = "s001";
-                red[1] = "Panadol";
-                red[2] = "Pera";
-                red[3] = true;
-                red[4] = 250;
-                
-                model.addRow(red);
-            }
-        });
-		
+				
         dugmeBrisi.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
             
-                // i = the index of the selected row
                 int i = stanjeTabela.getSelectedRow();
                 if(i >= 0){
                     model.removeRow(i);
                 }
                 else{
-                    System.out.println("Delete Error");
+                    System.out.println("Greska pri brisanju");
                 }
             }
         });
         
+        dugmeReset.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+                int brojRedova = model.getRowCount();
+                for (int i = brojRedova - 1; i >= 0; i--) {
+                	model.removeRow(i);
+                }
+
+            }
+        });
+        
         this.stanjePanel.add(stanjePane);
+        
         this.stanjePanel.add(dugmeDodaj);
         this.stanjePanel.add(dugmeBrisi);
+        this.stanjePanel.add(dugmeReset);
+        
         
 		this.tabKartica.add("Stanje", this.stanjePanel);
 		
 	}
 	
+	public void dodajLekUTabelu(Lek lek) {
+		Object[] red = new Object[5];
+		
+		red[0] = lek.getSifra();
+		red[1] = lek.getIme();
+		red[2] = lek.getProizvodjac();
+		red[3] = lek.isNaRecept();
+		red[4] = lek.getCena();
+		
+		model.addRow(red);
+
+	}
+	
 	private void addBezReceptPanel() {
 		this.bezReceptPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+		
+		List<Lek> drugs = MainFrame.getInstance().getLekRepozitorijum().ucitajLekove();
 		
 		JPanel noviPanel = new JPanel();
 		noviPanel.setPreferredSize(new Dimension(300, 400));
@@ -120,42 +140,31 @@ public class TabelaKorpaPanel extends JPanel {
 		JTextField sifraField = new JTextField();
 		sifraField.setPreferredSize(new Dimension(200, 30));
 		
-		JTextField sifraField1 = new JTextField();
-		sifraField1.setPreferredSize(new Dimension(200, 30));
-		
-		JTextField sifraField2 = new JTextField();
-		sifraField2.setPreferredSize(new Dimension(200, 30));
-		
-		JTextField sifraField3 = new JTextField();
-		sifraField3.setPreferredSize(new Dimension(200, 30));
-		
-		JTextField sifraField4 = new JTextField();
-		sifraField4.setPreferredSize(new Dimension(200, 30));
-		
 		JTextField kolicinaField = new JTextField();
 		kolicinaField.setPreferredSize(new Dimension(75, 30));
 		
-		JTextField kolicinaField1 = new JTextField();
-		kolicinaField1.setPreferredSize(new Dimension(75, 30));
-		
-		JTextField kolicinaField2 = new JTextField();
-		kolicinaField2.setPreferredSize(new Dimension(75, 30));
-		
-		JTextField kolicinaField3 = new JTextField();
-		kolicinaField3.setPreferredSize(new Dimension(75, 30));
-		
-		JTextField kolicinaField4 = new JTextField();
-		kolicinaField4.setPreferredSize(new Dimension(75, 30));
-		
-		JButton dodajLekove = new JButton("Dodaj lekove");
+		JButton dodajLekove = new JButton("Dodaj lek");
 		dodajLekove.setPreferredSize(new Dimension(275, 30));
 		
 		dodajLekove.addActionListener(new ActionListener(){
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-            	System.out.println(sifraField.getText());
-            	System.out.println(kolicinaField.getText());
+            public void actionPerformed(ActionEvent e) {    
+            	int multiplier = Integer.parseInt(kolicinaField.getText());
+            	
+            	for (Lek lek: drugs){
+            		if (lek.getSifra().equals(sifraField.getText())){
+            			for (int i = 0; i < multiplier; i++) {
+                			dodajLekUTabelu(lek);           				
+            			}
+            		}
+            	}	
+            	
+        		String poruka = "Lek je uspesno dodat";
+    			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);
+            	
+            	sifraField.setText("");
+            	kolicinaField.setText("");
             }
         });
 		
@@ -164,18 +173,6 @@ public class TabelaKorpaPanel extends JPanel {
 
 		noviPanel.add(sifraField);
 		noviPanel.add(kolicinaField);
-		
-		noviPanel.add(sifraField1);
-		noviPanel.add(kolicinaField1);
-		
-		noviPanel.add(sifraField2);
-		noviPanel.add(kolicinaField2);
-
-		noviPanel.add(sifraField3);
-		noviPanel.add(kolicinaField3);
-		
-		noviPanel.add(sifraField4);
-		noviPanel.add(kolicinaField4);
 		
 		noviPanel.add(dodajLekove);
 		

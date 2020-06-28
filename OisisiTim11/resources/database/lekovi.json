@@ -33,12 +33,5 @@
     "proizvodjac": "Pera & Co",
     "naRecept": false,
     "cena": 220.5
-  },
-  {
-    "sifra": "s006",
-    "ime": "Nimulid",
-    "proizvodjac": "Galenika",
-    "naRecept": false,
-    "cena": 86.0
   }
 ]
