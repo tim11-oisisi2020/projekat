@@ -40,10 +40,13 @@ public class TabelaLekovaPanel extends JPanel {
 		wellcomeMessage.setVerticalAlignment(JLabel.CENTER);
 
 		this.setBackground(MainFrame.getInstance().getZelenaPozadina());
+		
 		this.add(wellcomeMessage);
 
 		this.addTable();
 		this.addBottomPanel();
+		
+		
 	}
 
 	private void addTable() {
@@ -78,6 +81,7 @@ public class TabelaLekovaPanel extends JPanel {
 		panel.add(searchableColumnsCb);
 		panel.add(searchField);
 		panel.add(new JScrollPane(tabelaLekova));
+		panel.setPreferredSize(new Dimension(200, 200));
 		this.add(panel);
 	}
 	
