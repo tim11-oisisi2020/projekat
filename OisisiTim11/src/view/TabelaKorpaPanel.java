@@ -99,7 +99,7 @@ public class TabelaKorpaPanel extends JPanel {
         
         this.stanjePanel.add(stanjePane);
         
-        this.stanjePanel.add(dugmeDodaj);
+        //this.stanjePanel.add(dugmeDodaj);
         this.stanjePanel.add(dugmeBrisi);
         this.stanjePanel.add(dugmeReset);
         
@@ -149,22 +149,39 @@ public class TabelaKorpaPanel extends JPanel {
 		dodajLekove.addActionListener(new ActionListener(){
 
             @Override
-            public void actionPerformed(ActionEvent e) {    
-            	int multiplier = Integer.parseInt(kolicinaField.getText());
-            	
-            	for (Lek lek: drugs){
-            		if (lek.getSifra().equals(sifraField.getText())){
-            			for (int i = 0; i < multiplier; i++) {
-                			dodajLekUTabelu(lek);           				
-            			}
+            public void actionPerformed(ActionEvent e) { 
+            	if (kolicinaField.getText().equals("")) {
+            		String poruka = "Polje za kolicinu ne sme biti prazno";
+        			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);           		
+            	} else if (sifraField.getText().equals("")) {
+            		String poruka = "Polje za sifru ne sme biti prazno";
+        			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);
+            	} else {
+            		
+            		try {
+                    	int multiplier = Integer.parseInt(kolicinaField.getText());
+                    	
+                    	for (Lek lek: drugs){
+                    		if (lek.getSifra().equals(sifraField.getText())){
+                    			for (int i = 0; i < multiplier; i++) {
+                        			dodajLekUTabelu(lek);           				
+                    			}
+                    		}
+                    	}	
+                    	
+                		String poruka = "Lek je uspesno dodat";
+            			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);
+                    	
+                    	sifraField.setText("");
+                    	kolicinaField.setText("");
+                    	
+            		} catch (NumberFormatException error) {
+                		String poruka = "Polje za kolicinu mora biti broj!";
+            			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);    
             		}
-            	}	
-            	
-        		String poruka = "Lek je uspesno dodat";
-    			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);
-            	
-            	sifraField.setText("");
-            	kolicinaField.setText("");
+
+            	}
+
             }
         });
 		
@@ -185,5 +202,8 @@ public class TabelaKorpaPanel extends JPanel {
 	private void addReceptPanel() {
 		this.receptPanel = new JPanel();
 		this.tabKartica.add("Recept", this.receptPanel);
+		
+		
+		
 	}
 }
