@@ -99,7 +99,7 @@ public class TabelaKorpaPanel extends JPanel {
         
         this.stanjePanel.add(stanjePane);
         
-        //this.stanjePanel.add(dugmeDodaj);
+        //this.stanjePanel.add(dugmeDodaj/);
         this.stanjePanel.add(dugmeBrisi);
         this.stanjePanel.add(dugmeReset);
         
