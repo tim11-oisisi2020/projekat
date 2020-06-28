@@ -1,14 +1,14 @@
 [
 	{
 		"datum": "10-05-2020 16:47:08",
-		"sifra" : "123",
+		"sifra" : "001",
 		"lekar" : "Pera",
 		"jmbgPacijenta" : "1234567891234"
 
 	},
 	{
 		"datum": "22-09-2020 12:10:15",
-		"sifra" : "325",
+		"sifra" : "002",
 		"lekar" : "Mika",
 		"jmbgPacijenta" : "8956746813549"
 
