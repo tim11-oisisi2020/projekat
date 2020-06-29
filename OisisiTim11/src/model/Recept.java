@@ -71,6 +71,10 @@ public class Recept {
 		return lekoviIspis;
 	}
 	
+	public Lek[] getLekoviArray() {
+		return lekovi;
+	}
+	
 	public void setLekovi(Lek[] lekovi) {
 		this.lekovi = lekovi;
 	}

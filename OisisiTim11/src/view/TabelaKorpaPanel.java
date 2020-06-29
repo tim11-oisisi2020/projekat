@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import model.Lek;
+import model.Recept;
 import model.table.DrugsTableModel;
 
 import com.sun.glass.events.MouseEvent;
@@ -35,6 +36,8 @@ public class TabelaKorpaPanel extends JPanel {
 	public JPanel receptPanel;
 	public JPanel bezReceptPanel;
 	public DefaultTableModel model = new DefaultTableModel();
+	
+	public Lek lek;
 
 	
 	public TabelaKorpaPanel() {		
@@ -201,9 +204,64 @@ public class TabelaKorpaPanel extends JPanel {
 	
 	private void addReceptPanel() {
 		this.receptPanel = new JPanel();
-		this.tabKartica.add("Recept", this.receptPanel);
 		
+		List<Recept> recepti = MainFrame.getInstance().getReceptiRepozitorijum().ucitajRecepte();
 		
+		JPanel noviPanel = new JPanel();
+		noviPanel.setPreferredSize(new Dimension(300, 400));
 		
+		JLabel sifraLabel = new JLabel("Sifra");
+		sifraLabel.setFont(new Font("Serif", Font.BOLD, 18));
+		sifraLabel.setPreferredSize(new Dimension(200, 30));
+		
+		JTextField sifraField = new JTextField();
+		sifraField.setPreferredSize(new Dimension(200, 30));
+		
+		JButton dodajLekove = new JButton("Dodaj lek");
+		dodajLekove.setPreferredSize(new Dimension(275, 30));
+		
+		dodajLekove.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) { 
+            	if (sifraField.getText().equals("")) {
+            		String poruka = "Polje za sifru ne sme biti prazno";
+        			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);
+            	} else {
+            		
+            		try {
+                    	
+                    	for (Recept recept: recepti){
+                    		if (recept.getSifra().equals(sifraField.getText())){
+                    			Lek[] lekovi = recept.getLekoviArray();
+                    			for (Lek lek: lekovi) {
+                        			dodajLekUTabelu(lek);      	
+                    			}     				
+                    		}
+                    	}	
+                    	
+                		String poruka = "Lek je uspesno dodat";
+            			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);
+                    	
+                    	sifraField.setText("");
+                    	
+            		} catch (NumberFormatException error) {
+                		String poruka = "Polje za kolicinu mora biti broj!";
+            			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);    
+            		}
+
+            	}
+
+            }
+        });
+		
+		noviPanel.add(sifraLabel);
+		noviPanel.add(sifraField);
+		
+		noviPanel.add(dodajLekove);
+		
+		this.receptPanel.add(noviPanel);
+		
+		this.tabKartica.add("Recept", this.receptPanel);	
 	}
 }
