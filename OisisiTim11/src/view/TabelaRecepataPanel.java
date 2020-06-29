@@ -106,18 +106,6 @@ public class TabelaRecepataPanel extends JPanel{
 		insertujRecept.setPreferredSize(new Dimension(150, 50));
 		buttonBox.add(insertujRecept);
 		
-		JButton editujRecept = new JButton("Izmeni Recept");
-		editujRecept.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Klik");
-			}
-		});
-		editujRecept.setPreferredSize(new Dimension(150, 50));
-		buttonBox.add(editujRecept);
-		
-		
 		buttonBox.setPreferredSize(new Dimension(600, 150));
 		this.add(buttonBox, BorderLayout.SOUTH);
 	}

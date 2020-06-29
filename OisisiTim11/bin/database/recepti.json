@@ -85,20 +85,5 @@
         "cena": 90.0
       }
     ]
-  },
-  {
-    "datum": "29-06-2020 18:45:00",
-    "sifra": "004",
-    "lekar": "Minja Masina",
-    "jmbgPacijenta": "0710997810160",
-    "lekovi": [
-      {
-        "sifra": "s001",
-        "ime": "Brufen",
-        "proizvodjac": "Pera & Co",
-        "naRecept": false,
-        "cena": 117.5
-      }
-    ]
   }
 ]
