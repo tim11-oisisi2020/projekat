@@ -1,0 +1,103 @@
+[
+  {
+    "ukupnaCena": 748.1,
+    "lekovi": [
+      {
+        "sifra": "s001",
+        "ime": "Brufen",
+        "proizvodjac": "Pera & Co",
+        "naRecept": false,
+        "cena": 117.5
+      },
+      {
+        "sifra": "s002",
+        "ime": "Panadol",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 180.6
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      }
+    ]
+  },
+  {
+    "ukupnaCena": 658.1,
+    "lekovi": [
+      {
+        "sifra": "s001",
+        "ime": "Brufen",
+        "proizvodjac": "Pera & Co",
+        "naRecept": false,
+        "cena": 117.5
+      },
+      {
+        "sifra": "s002",
+        "ime": "Panadol",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 180.6
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      }
+    ]
+  }
+]

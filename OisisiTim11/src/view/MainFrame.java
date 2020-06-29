@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import model.TipKorisnika;
 import model.repo.KorisnikRepozitorijum;
 import model.repo.LekoviRepozitorijum;
+import model.repo.RacuniRepozitorijum;
 import model.repo.ReceptiRepozitorijum;
 
 public class MainFrame extends JFrame {
@@ -30,6 +31,7 @@ public class MainFrame extends JFrame {
 	private KorisnikRepozitorijum korisnikRepozitorijum;
 	private LekoviRepozitorijum lekRepozitorijum;
 	private ReceptiRepozitorijum receptiRepozitorijum;
+	private RacuniRepozitorijum racuniRepozitorijum;
 	
 	private static MainFrame instance = null;
 	private final Gson gson;
@@ -41,6 +43,7 @@ public class MainFrame extends JFrame {
 		this.korisnikRepozitorijum = new KorisnikRepozitorijum(gson, direktorijum);
 		this.lekRepozitorijum = new LekoviRepozitorijum(gson, direktorijum);
 		this.receptiRepozitorijum = new ReceptiRepozitorijum(gson, direktorijum);
+		this.racuniRepozitorijum = new RacuniRepozitorijum(gson, direktorijum);
 	}
 	
 	public static MainFrame getInstance() {
@@ -120,6 +123,10 @@ public class MainFrame extends JFrame {
 	
 	public ReceptiRepozitorijum getReceptiRepozitorijum() {
 		return receptiRepozitorijum;
+	}
+	
+	public RacuniRepozitorijum getRacuniRepozitorijum() {
+		return racuniRepozitorijum;
 	}
 
 	private void iscrtajKomponente() {

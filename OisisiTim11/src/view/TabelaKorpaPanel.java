@@ -21,9 +21,14 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.text.TableView.TableRow;
 
+import model.Korisnik;
 import model.Lek;
+import model.Racun;
 import model.Recept;
+import model.repo.RacuniRepozitorijum;
 import model.table.DrugsTableModel;
 
 import com.sun.glass.events.MouseEvent;
@@ -38,6 +43,9 @@ public class TabelaKorpaPanel extends JPanel {
 	public DefaultTableModel model = new DefaultTableModel();
 	
 	public Lek lek;
+	public Lek[] lekovi;
+	
+	public Korisnik korisnik;
 
 	
 	public TabelaKorpaPanel() {		
@@ -66,12 +74,60 @@ public class TabelaKorpaPanel extends JPanel {
 		
 		stanjeTabela.setModel(model);
 		
-		JButton dugmeDodaj = new JButton("Dodaj");
+		JButton dugmeKupi = new JButton("Kupi");
 		JButton dugmeBrisi = new JButton("Brisi");
 		JButton dugmeReset = new JButton("Odustani");
 		
 		JScrollPane stanjePane = new JScrollPane(stanjeTabela);	
 				
+        dugmeKupi.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	float ukupnaCena = 0;
+            	List<Lek> lekoviList = new ArrayList<Lek>();
+            
+            	for (int i = 0; i < stanjeTabela.getRowCount(); i++){
+            		Lek lek = new Lek(
+            				(String) stanjeTabela.getValueAt(i, 0), 
+            				(String) stanjeTabela.getValueAt(i, 1), 
+            				(String) stanjeTabela.getValueAt(i, 2),
+            				(boolean) stanjeTabela.getValueAt(i, 3),
+            				(float) stanjeTabela.getValueAt(i, 4)
+            		);
+            		
+            		lekoviList.add(lek);
+            		ukupnaCena = ukupnaCena + lek.getCena();
+            	}
+            	
+            	Lek[] lekovi = new Lek[lekoviList.size()];
+            	lekovi = lekoviList.toArray(lekovi);
+            	
+             	
+            	Racun noviRacun = new Racun(ukupnaCena, lekovi);
+           	
+            	RacuniRepozitorijum racuniRepozitorijum = MainFrame.getInstance().getRacuniRepozitorijum();
+            	boolean uspesno = false;
+            	uspesno = racuniRepozitorijum.insertujRacun(noviRacun);
+            	
+            	if (!uspesno) {
+        			String poruka = "Cuvanje novog racuna nije uspesno";
+        			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka);            		
+            	} else {
+            		
+        			String poruka = "Racun je uspesno zabelezen";
+        			JOptionPane.showMessageDialog(MainFrame.getInstance(), poruka); 
+            		
+                    int brojRedova = model.getRowCount();
+                    for (int i = brojRedova - 1; i >= 0; i--) {
+                    	model.removeRow(i);
+                    }
+            	}
+
+            }
+        });
+		
         dugmeBrisi.addActionListener(new ActionListener(){
 
             @Override
@@ -102,7 +158,7 @@ public class TabelaKorpaPanel extends JPanel {
         
         this.stanjePanel.add(stanjePane);
         
-        //this.stanjePanel.add(dugmeDodaj/);
+        this.stanjePanel.add(dugmeKupi);
         this.stanjePanel.add(dugmeBrisi);
         this.stanjePanel.add(dugmeReset);
         
