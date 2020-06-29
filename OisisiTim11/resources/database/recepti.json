@@ -1,16 +1,89 @@
 [
-	{
-		"datum": "10-05-2020 16:47:08",
-		"sifra" : "001",
-		"lekar" : "Pera",
-		"jmbgPacijenta" : "1234567891234"
-
-	},
-	{
-		"datum": "22-09-2020 12:10:15",
-		"sifra" : "002",
-		"lekar" : "Mika",
-		"jmbgPacijenta" : "8956746813549"
-
-	}
+  {
+    "datum": "10-05-2020 16:47:08",
+    "sifra": "001",
+    "lekar": "Pera",
+    "jmbgPacijenta": "1234567891234",
+    "lekovi": [
+      {
+        "sifra": "s001",
+        "ime": "Brufen",
+        "proizvodjac": "Pera & Co",
+        "naRecept": false,
+        "cena": 117.5
+      },
+      {
+        "sifra": "s002",
+        "ime": "Panadol",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 180.6
+      }
+    ]
+  },
+  {
+    "datum": "22-09-2020 12:10:15",
+    "sifra": "002",
+    "lekar": "Mika",
+    "jmbgPacijenta": "8956746813549",
+    "lekovi": [
+      {
+        "sifra": "s003",
+        "ime": "Diklofen",
+        "proizvodjac": "Zika & Co",
+        "naRecept": true,
+        "cena": 280.79
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      },
+      {
+        "sifra": "s005",
+        "ime": "Kafetin",
+        "proizvodjac": "Pera & Co",
+        "naRecept": false,
+        "cena": 220.5
+      }
+    ]
+  },
+  {
+    "datum": "29-06-2020 18:30:00",
+    "sifra": "003",
+    "lekar": "Minja",
+    "jmbgPacijenta": "0404970360046",
+    "lekovi": [
+      {
+        "sifra": "s001",
+        "ime": "Brufen",
+        "proizvodjac": "Pera & Co",
+        "naRecept": false,
+        "cena": 117.5
+      },
+      {
+        "sifra": "s002",
+        "ime": "Panadol",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 180.6
+      },
+      {
+        "sifra": "s003",
+        "ime": "Diklofen",
+        "proizvodjac": "Zika & Co",
+        "naRecept": true,
+        "cena": 280.79
+      },
+      {
+        "sifra": "s004",
+        "ime": "Ranisan",
+        "proizvodjac": "Mika & Co",
+        "naRecept": false,
+        "cena": 90.0
+      }
+    ]
+  }
 ]

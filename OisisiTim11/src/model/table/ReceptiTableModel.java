@@ -17,7 +17,7 @@ public class ReceptiTableModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 4;
+		return 5;
 	}
 
 	@Override
@@ -39,6 +39,8 @@ public class ReceptiTableModel extends AbstractTableModel {
 				return recept.getLekar();
 			case 3:
 				return recept.getJmbgPacijenta();
+			case 4:
+				return recept.getLekovi();
 			default:
 				return "";
 		}

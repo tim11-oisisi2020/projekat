@@ -1,11 +1,18 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -13,8 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import view.dialog.DodajLekDialog;
+import view.dialog.DodajReceptDialog;
 import controller.TabeleSearchActions;
+import model.Lek;
 import model.Recept;
+import model.table.DrugsTableModel;
 import model.table.ReceptiTableModel;
 
 public class TabelaRecepataPanel extends JPanel{
@@ -30,9 +41,10 @@ public class TabelaRecepataPanel extends JPanel{
 		wellcomeMessage.setVerticalAlignment(JLabel.CENTER);
 		
 		this.setBackground(MainFrame.getInstance().getZelenaPozadina());
-		this.add(wellcomeMessage);
+		//this.add(wellcomeMessage);
 		
 		this.addTable();
+		this.addBottomPanel();
 	}
 	
 	private void addTable() {
@@ -46,7 +58,7 @@ public class TabelaRecepataPanel extends JPanel{
 		this.tabelaRecepta = new JTable(this.tableModel);
 
 		final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.tableModel);
-
+		
 		this.tabelaRecepta.setRowSorter(sorter);
 
 		// Create Combo box for search
@@ -63,10 +75,55 @@ public class TabelaRecepataPanel extends JPanel{
 		searchField.addKeyListener(lekoviSearchActions.processKeyReleased());
 		searchableColumnsCb.addActionListener(lekoviSearchActions.processSelection());
 		
+		JScrollPane scrollPane = new JScrollPane(tabelaRecepta);
+		scrollPane.setPreferredSize(new Dimension(600, 500));
+		
+		
 		// Pack GUI
 		panel.add(searchableColumnsCb);
 		panel.add(searchField);
-		panel.add(new JScrollPane(tabelaRecepta));
+		panel.add(scrollPane);
 		this.add(panel);
 	}
+	
+	private void addBottomPanel() {
+		JPanel buttonBox = new JPanel();
+		buttonBox.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 30));
+		buttonBox.setPreferredSize(new Dimension(100, 100));
+		buttonBox.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		
+		JButton insertujRecept = new JButton("Insertuj Recept");
+		insertujRecept.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DodajReceptDialog dodajReceptDialog = new DodajReceptDialog(null);
+				dodajReceptDialog.setVisible(true);
+			}
+			
+		});
+		
+		insertujRecept.setPreferredSize(new Dimension(150, 50));
+		buttonBox.add(insertujRecept);
+		
+		JButton editujRecept = new JButton("Izmeni Recept");
+		editujRecept.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Klik");
+			}
+		});
+		editujRecept.setPreferredSize(new Dimension(150, 50));
+		buttonBox.add(editujRecept);
+		
+		
+		buttonBox.setPreferredSize(new Dimension(600, 150));
+		this.add(buttonBox, BorderLayout.SOUTH);
+	}
+	
+	public ReceptiTableModel getTableModel() {
+		return tableModel;
+	}
+	
 }

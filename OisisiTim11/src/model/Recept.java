@@ -9,18 +9,20 @@ public class Recept {
 	private String lekar;
 	
 	private String jmbgPacijenta;
-	
+
+	private Lek[] lekovi;
 	
 	public Recept() {
 		
 	}
 
-	public Recept(String datum, String sifra, String lekar, String jmbgPacijenta) {
+	public Recept(String datum, String sifra, String lekar, String jmbgPacijenta, Lek[] lekovi) {
 		super();
 		this.datum = datum;
 		this.sifra = sifra;
 		this.lekar = lekar;
 		this.jmbgPacijenta = jmbgPacijenta;
+		this.lekovi = lekovi;
 	}
 
 	public String getDatum() {
@@ -55,14 +57,32 @@ public class Recept {
 		this.jmbgPacijenta = jmbgPacijenta;
 	}
 	
+	public String getLekovi() {
+		String lekoviIspis = "";
+		
+		for (int i = 0; i < lekovi.length; i++) {
+			if (i == 0) {
+				lekoviIspis = lekovi[i].getIme();
+			} else {
+				lekoviIspis = lekoviIspis + ", " + lekovi[i].getIme();
+			}
+		}
+		
+		return lekoviIspis;
+	}
+	
+	public void setLekovi(Lek[] lekovi) {
+		this.lekovi = lekovi;
+	}
+	
 	public static String[] getTableHeader() {
-		return new String[]{"Datum", "Sifra", "Lekar", "JMBG Pacijenta"};
+		return new String[]{"Datum", "Sifra", "Lekar", "JMBG Pacijenta", "Lista lekova"};
 	}
 
 	@Override
 	public String toString() {
 		return "Recept [datum=" + datum + ", sifra=" + sifra + ", lekar=" + lekar + ", jmbgPacijenta="
-				+ jmbgPacijenta + "]";
+				+ jmbgPacijenta + ", lekovi=[" + lekovi + "]]";
 	}
 	
 }
