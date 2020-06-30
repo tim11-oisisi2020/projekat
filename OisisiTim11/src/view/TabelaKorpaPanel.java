@@ -1,18 +1,15 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,17 +18,14 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView.TableRow;
 
 import model.Korisnik;
 import model.Lek;
 import model.Racun;
 import model.Recept;
 import model.repo.RacuniRepozitorijum;
-import model.table.DrugsTableModel;
+import model.table.IzvestajiTableModel;
 
-import com.sun.glass.events.MouseEvent;
 
 
 public class TabelaKorpaPanel extends JPanel {
@@ -41,6 +35,7 @@ public class TabelaKorpaPanel extends JPanel {
 	public JPanel receptPanel;
 	public JPanel bezReceptPanel;
 	public DefaultTableModel model = new DefaultTableModel();
+	public IzvestajiTableModel izvestajiTableModel;
 	
 	public Lek lek;
 	public Lek[] lekovi;
@@ -123,6 +118,13 @@ public class TabelaKorpaPanel extends JPanel {
                     for (int i = brojRedova - 1; i >= 0; i--) {
                     	model.removeRow(i);
                     }
+                    
+                    JPanel selektovaniPanel = MainFrame.getInstance().getMainPanel().getPanelIzvestaja();
+        			TabelaIzvestajaPanel tabelaIzvestajaPanel = (TabelaIzvestajaPanel) selektovaniPanel;
+                    List<Racun> racuni = racuniRepozitorijum.ucitajRacune();
+                    tabelaIzvestajaPanel.getTableModel().iscrtajTabeluSaRacunima(racuni);
+                    tabelaIzvestajaPanel.ukupnaZarada();
+        			
             	}
 
             }

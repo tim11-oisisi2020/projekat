@@ -7,9 +7,13 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.IzvestajClickAction;
@@ -47,7 +51,10 @@ public class MainPanel extends JPanel {
 		
 		JPanel logoPanel = new JPanel();
 		logoPanel.setPreferredSize(new Dimension(150, 150));
-		logoPanel.setBackground(Color.YELLOW);
+	
+		ImagePanel panel = new ImagePanel(new ImageIcon(MainFrame.logoPutanja).getImage());
+		
+		logoPanel.add(panel);
 		
 		Color dugmePozadina = MainFrame.getInstance().getDugmeZelena();
 		Color akcenatCrvena = MainFrame.getInstance().getAkcenatCrvena();
@@ -149,4 +156,37 @@ public class MainPanel extends JPanel {
 	    return selektovaniPanel;
 	}
 	
+	public JPanel getPanelIzvestaja() {
+		JPanel selektovaniPanel = null;
+		
+		Component component = tabelarniPrikaziCard.getComponent(3);
+		
+		selektovaniPanel = (JPanel) component;
+		
+		return selektovaniPanel;
+	}
+	
+	
+}
+
+class ImagePanel extends JPanel {
+	private Image img;
+	
+	public ImagePanel (String img) {
+		this(new ImageIcon(img).getImage());
+	}
+	
+	public ImagePanel(Image img) {
+		 this.img = img;
+		 Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+		 setPreferredSize(size);
+		 setMinimumSize(size);
+		 setMaximumSize(size);
+		 setSize(size);
+		 setLayout(null);
+	}
+
+	public void paintComponent(Graphics g) {
+		g.drawImage(img, 0, 0, null);
+	}
 }

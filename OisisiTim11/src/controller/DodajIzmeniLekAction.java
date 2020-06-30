@@ -2,18 +2,15 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.util.List;
 
-import javax.swing.JDialog;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.Korisnik;
 import model.Lek;
 import model.repo.LekoviRepozitorijum;
 import view.MainFrame;
-import view.TabelaKorisnikaPanel;
 import view.TabelaLekovaPanel;
 import view.dialog.DodajLekDialog;
 

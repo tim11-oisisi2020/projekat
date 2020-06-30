@@ -4,15 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,12 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import view.dialog.DodajLekDialog;
 import view.dialog.DodajReceptDialog;
 import controller.TabeleSearchActions;
-import model.Lek;
 import model.Recept;
-import model.table.DrugsTableModel;
 import model.table.ReceptiTableModel;
 
 public class TabelaRecepataPanel extends JPanel{
@@ -33,15 +27,8 @@ public class TabelaRecepataPanel extends JPanel{
 	private ReceptiTableModel tableModel;
 	private JTable tabelaRecepta;
 
-	public TabelaRecepataPanel() {
-		JLabel wellcomeMessage = new JLabel();
-		wellcomeMessage.setText("Tabela Recepata");
-		wellcomeMessage.setFont(new Font("Serif", Font.BOLD, 40));
-		wellcomeMessage.setHorizontalAlignment(JLabel.CENTER);
-		wellcomeMessage.setVerticalAlignment(JLabel.CENTER);
-		
+	public TabelaRecepataPanel() {	
 		this.setBackground(MainFrame.getInstance().getZelenaPozadina());
-		//this.add(wellcomeMessage);
 		
 		this.addTable();
 		this.addBottomPanel();

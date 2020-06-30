@@ -20,8 +20,26 @@ public class Racun {
 		return ukupnaCena;
 	}
 	 
-	public Lek[] getLekovi() {
+	public String getLekovi() {
+		String lekoviIspis = "";
+		
+		for (int i = 0; i < lekovi.length; i++) {
+			if (i == 0) {
+				lekoviIspis = lekovi[i].getIme();
+			} else {
+				lekoviIspis = lekoviIspis + ", " + lekovi[i].getIme();
+			}
+		}
+		
+		return lekoviIspis;
+	}
+	
+	public Lek[] getLekoviArray() {
 		return lekovi;
+	}
+	
+	public static String[] getTableHeader() {
+		return new String[]{"Lekovi", "Ukupna cena"};
 	}
 	
 	@Override

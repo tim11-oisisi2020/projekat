@@ -33,6 +33,8 @@ public class MainFrame extends JFrame {
 	private ReceptiRepozitorijum receptiRepozitorijum;
 	private RacuniRepozitorijum racuniRepozitorijum;
 	
+	public final static String logoPutanja = Paths.get("").toAbsolutePath() + "\\resources\\assets\\" + "Logo.png";
+	
 	private static MainFrame instance = null;
 	private final Gson gson;
 	
